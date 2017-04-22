@@ -8,7 +8,7 @@ La nostra idea també es implementar un algoritme **alpha-beta**, més eficient 
 
 ## TODO
 **Fer abans de començar**
-- [ ] Borrar projecte actual
+- [x] Borrar projecte actual
 - [ ] Crear nou projecte
 - [ ] Afegir .class ja fets
 - [ ] Afegir UI (tauler)
