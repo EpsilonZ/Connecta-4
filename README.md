@@ -9,10 +9,19 @@ La nostra idea també es implementar un algoritme **alpha-beta**, més eficient 
 ## TODO
 **Fer abans de començar**
 - [x] Borrar projecte actual
-- [ ] Crear nou projecte
-- [ ] Afegir .class ja fets
-- [ ] Afegir UI (tauler)
-- [ ] Testejar que tot funciona bé   
+- [x] Crear nou projecte
+- [x] Afegir .class ja fets
+- [x] Afegir UI (tauler)
+- [x] Testejar que tot funciona bé   
+
+** Connecta 4 **
+- [ ] jugador
+	- [ ] Constructoras
+- [ ] moviment
+	- [ ] Definir moviment
+	- [ ] Funció heurística
+	- [ ] Alfa-Beta
+- [ ] getNom
 
 ## Autors
 - [Andrés Prieto]()
