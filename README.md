@@ -14,7 +14,7 @@ La nostra idea també es implementar un algoritme **alpha-beta**, més eficient 
 - [x] Afegir UI (tauler)
 - [x] Testejar que tot funciona bé   
 
-** Connecta 4 **
+**Connecta 4**
 - [ ] jugador
 	- [ ] Constructoras
 	- [ ] get Nom
