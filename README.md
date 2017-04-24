@@ -16,8 +16,8 @@ La nostra idea també es implementar un algoritme **alpha-beta**, més eficient 
 
 **Connecta 4**
 - [ ] jugador
-	- [ ] Constructoras
-	- [ ] get Nom
+	- [x] Constructoras
+	- [x] get Nom
 	- [ ] moviment
 		- [ ] Definir moviment
 		- [ ] Funció heurística

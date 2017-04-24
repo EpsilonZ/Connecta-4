@@ -269,7 +269,7 @@ public class Juga2 extends javax.swing.JFrame {
 
         //player1 = new Profe(6,true);
         //player2 = new Aleatori();
-        player1 = new Manual();
+        player1 = new Player();
         player2 = new Profe(6,false);
     }
     
