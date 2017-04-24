@@ -17,11 +17,11 @@ La nostra idea també es implementar un algoritme **alpha-beta**, més eficient 
 ** Connecta 4 **
 - [ ] jugador
 	- [ ] Constructoras
-- [ ] moviment
-	- [ ] Definir moviment
-	- [ ] Funció heurística
-	- [ ] Alfa-Beta
-- [ ] getNom
+	- [ ] get Nom
+	- [ ] moviment
+		- [ ] Definir moviment
+		- [ ] Funció heurística
+		- [ ] Alfa-Beta
 
 ## Autors
 - [Andrés Prieto]()
