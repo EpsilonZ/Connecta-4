@@ -42,7 +42,7 @@ public class Player implements Jugador {
             if (t.movpossible(i)) {
                 Tauler seguentTauler = new Tauler(t);
                 seguentTauler.afegeix(i, color);
-                int heuristicaColumna = alfaBeta(seguentTauler, oponent(color), 0.0, 0.0, profunditat);
+                int heuristicaColumna = alfaBeta(seguentTauler, oponent(color), InfinitNegatiu, InfinitPositiu, profunditat);
                 if (heuristicaColumna > millorHeuristica) {
                     millorColumna = i;
                     millorHeuristica = heuristicaColumna;
