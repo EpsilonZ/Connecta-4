@@ -19,7 +19,7 @@ La nostra idea també es implementar un algoritme **alpha-beta**, més eficient 
 	- [x] Constructoras
 	- [x] get Nom
 	- [ ] moviment
-		- [ ] Definir moviment
+		- [x] Definir moviment
 		- [x] Funció heurística
 		- [ ] Alfa-Beta
 
