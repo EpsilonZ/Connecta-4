@@ -21,7 +21,7 @@ La nostra idea també es implementar un algoritme **alpha-beta**, més eficient 
 	- [ ] moviment
 		- [ ] Definir moviment
 			- [x] Definir estructura funció
-			- [ ] Reemplaçar paràmetres alpha beta
+			- [x] Reemplaçar paràmetres alpha beta
 		- [x] Funció heurística
 		- [ ] Alfa-Beta
 
