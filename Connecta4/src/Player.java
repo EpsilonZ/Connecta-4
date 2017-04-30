@@ -21,39 +21,44 @@ public class Player implements Jugador {
     private Double InfinitPositiu = Double.POSITIVE_INFINITY;
     private Double InfinitNegatiu = -InfinitPositiu;
     private String nom = "El puto amo";
-    private int X = 1;
-    private int O = -1;
+    private int profunditat = 6;
+
 
     /** Constructor **/
     public Player() {}
 
     /** Jugador */
-    @Override
-    public int moviment(Tauler t, int color) {
-
-        return 0; //La columna on jugar
-    }
 
     @Override
     public String nom() {
         return this.nom;
     }
 
-    /** Privats */
-    /**
-     * @param jug
-     * @param t
-     * @param alpha
-     * @param beta
-     * @param profunditat
-     * @return
-     */
-
+    @Override
+    public int moviment(Tauler t, int color) {
+        int millorColumna = 0;
+        int millorHeuristica = 0;
+        for (int i = 0; i < t.getMida(); i++) {
+            if (t.movpossible(i)) {
+                Tauler seguentTauler = new Tauler(t);
+                seguentTauler.afegeix(i, color);
+                int heuristicaColumna = alfaBeta(seguentTauler, oponent(color), 0.0, 0.0, profunditat);
+                if (heuristicaColumna > millorHeuristica) {
+                    millorColumna = i;
+                    millorHeuristica = heuristicaColumna;
+                }
+            }
+        }
+        return millorColumna;
+    }
 
     private int alfaBeta(int jug, Tauler t, Double alpha, Double beta, int profunditat) {
         return 0;
     }
 
+    private int oponent(int jugador) {
+        return -jugador;
+    }
     private int heuristica(Tauler t, int jugador) {
         int base = 128;
         int suma = 0;
