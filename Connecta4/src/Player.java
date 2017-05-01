@@ -38,19 +38,21 @@ public class Player implements Jugador {
 
     @Override
     public int moviment(Tauler t, int color) {
-        Double millorHeuristica = 0.0;
+        Double millorHeuristica = InfinitNegatiu;
         int millorColumna = 0;
         for (int i = 0; i < t.getMida(); i++) {
             if (t.movpossible(i)) {
                 Tauler seguentTauler = new Tauler(t);
                 seguentTauler.afegeix(i, color);
                 Double heuristicaColumna = -alfaBeta(seguentTauler, oponent(color), i, InfinitNegatiu, InfinitPositiu, profunditat);
+                System.out.println(heuristicaColumna);
                 if (heuristicaColumna > millorHeuristica) {
                     millorColumna = i;
                     millorHeuristica = heuristicaColumna;
                 }
             }
         }
+        System.out.println();
         return millorColumna;
     }
 
