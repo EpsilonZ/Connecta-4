@@ -19,11 +19,14 @@ La nostra idea també es implementar un algoritme **alpha-beta**, més eficient 
 	- [x] Constructoras
 	- [x] get Nom
 	- [ ] moviment
-		- [ ] Definir moviment
+		- [x] Definir moviment
 			- [x] Definir estructura funció
 			- [x] Reemplaçar paràmetres alpha beta
 		- [x] Funció heurística
-		- [ ] Alfa-Beta
+			- [ ] Millorar funció heurística
+		- [x] Alfa-Beta
+			- [ ] Dividir alfa beta en funció min/max
+			- [ ] Testejar
 
 ## Autors
 - [Andrés Prieto]()
