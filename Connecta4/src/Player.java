@@ -1,7 +1,9 @@
+import java.util.Random;
+
 /**
  * @author joan on 24/4/17.
  * @project Connecta4
- * @package PACKAGE_NAME
+ * @package src
  */
 public class Player implements Jugador {
 
@@ -36,13 +38,13 @@ public class Player implements Jugador {
 
     @Override
     public int moviment(Tauler t, int color) {
+        Double millorHeuristica = 0.0;
         int millorColumna = 0;
-        int millorHeuristica = 0;
         for (int i = 0; i < t.getMida(); i++) {
             if (t.movpossible(i)) {
                 Tauler seguentTauler = new Tauler(t);
                 seguentTauler.afegeix(i, color);
-                int heuristicaColumna = alfaBeta(seguentTauler, oponent(color), InfinitNegatiu, InfinitPositiu, profunditat);
+                Double heuristicaColumna = -alfaBeta(seguentTauler, oponent(color), i, InfinitNegatiu, InfinitPositiu, profunditat);
                 if (heuristicaColumna > millorHeuristica) {
                     millorColumna = i;
                     millorHeuristica = heuristicaColumna;
@@ -52,19 +54,41 @@ public class Player implements Jugador {
         return millorColumna;
     }
 
-    private int alfaBeta(int jug, Tauler t, Double alpha, Double beta, int profunditat) {
-        return 0;
+    /** Privats */
+    private Double alfaBeta(Tauler t, int jugador, int columnaAColocar, Double alpha, Double beta, int profunditat) {
+        Boolean solucioTrobada  = t.solucio(columnaAColocar, jugador);
+        Boolean profunditatFeta = profunditat != 0;
+        Boolean taulerNoComplet = t.espotmoure();
+
+        if (!solucioTrobada && !profunditatFeta && !taulerNoComplet) {
+            for (int i = 0; i < t.getMida(); i++) {
+                Tauler taulerOponent = new Tauler(t);
+                if (taulerOponent.movpossible(i)) {
+                    taulerOponent.afegeix(i, jugador);
+                    alpha = Math.max(alpha, -this.alfaBeta(t, oponent(jugador), i, -beta, -alpha, profunditat-1));
+                    if (beta <= alpha) {
+                        return alpha;
+                    }
+                }
+            }
+        } else {
+            alpha = heuristica(t, jugador);
+        }
+
+        return alpha;
     }
 
     private int oponent(int jugador) {
         return -jugador;
     }
-    private int heuristica(Tauler t, int jugador) {
-        int base = 128;
-        int suma = 0;
+
+    private Double heuristica(Tauler t, int jugador) {
+        Double base = 128.0;
+        Double suma = 0.0;
         int mida = t.getMida();
         for (int i = 0; i < mida; i++) {
             for (int j = 0; j < mida; j++) {
+                if (t.getColor(i, j) == 0) continue;
                 if (t.getColor(i, j) == jugador) {
                     suma += evaluacions[i][j];
                 } else {
