@@ -1,53 +1,31 @@
+import java.awt.*;
+import java.sql.Array;
+import java.util.ArrayList;
+
 /**
  * @author joan on 24/4/17.
  * @project Connecta4
  * @package src
  */
 public class Player implements Jugador {
-    private class Pair<F, S> {
-        public final F first;
-        public final S second;
 
-        public Pair(F first, S second) {
-            this.first = first;
-            this.second = second;
-        }
-    }
-
-        private static int[][] evaluacions = {
-            {3,4,5,7,7,5,4,3},
-            {4,6,8,10,10,8,6,4},
-            {5,8,11,13,13,11,8,5},
-            {6,10,14,16,16,14,10,6},
-            {6,10,14,16,16,14,10,6},
-            {5,8,11,13,13,11,8,5},
-            {4,6,8,10,10,8,6,4},
-            {3,4,5,7,7,5,4,3},
-    };
-
-
-    /** Propietats */
-    private Double InfinitPositiu = Double.POSITIVE_INFINITY;
-    private Double InfinitNegatiu = -InfinitPositiu;
+    /**
+     * Propietats
+     */
+    private Integer InfinitPositiu = Integer.MAX_VALUE;
+    private Integer InfinitNegatiu = -InfinitPositiu;
     private String nom = "El puto amo";
-    private int profunditat = 6;
+    private int profunditat = 5; // ha de ser par, sino empezar sin la 1 llamada sin el negativo
 
-
-    /** Constructor **/
+    /**
+     * Constructor
+     **/
     public Player() {
-        /*Tauler t = new Tauler(8);
-        System.out.println(t.solucio(0, 1));
-        t.afegeix(0, 1);
-        System.out.println(t.solucio(0, 1));
-        t.afegeix(0, 1);
-        System.out.println(t.solucio(0, 1));
-        t.afegeix(0, 1);
-        System.out.println(t.solucio(0, 1));
-        t.afegeix(0, 1);
-        System.out.println(t.solucio(0, 1));*/
     }
 
-    /** Jugador */
+    /**
+     * Jugador
+     */
 
     @Override
     public String nom() {
@@ -56,139 +34,354 @@ public class Player implements Jugador {
 
     @Override
     public int moviment(Tauler t, int color) {
-        Double millorHeuristica = InfinitNegatiu;
-        int millorColumna = 0;
-        for (int i = 0; i < t.getMida(); i++) {
-            if (t.movpossible(i)) {
-                Tauler seguentTauler = new Tauler(t);
-                seguentTauler.afegeix(i, color);
-                Double heuristicaColumna = -alfaBeta(seguentTauler, oponent(color), i, InfinitNegatiu, InfinitPositiu, profunditat);
-                System.out.println(heuristicaColumna);
-                if (heuristicaColumna > millorHeuristica) {
-                    millorColumna = i;
-                    millorHeuristica = heuristicaColumna;
+        int eval_act, eval_ant = InfinitNegatiu, millor_mov = 0;
+        for(int i=0; i<8; ++i){
+            if(t.movpossible(i)){
+                Tauler aux = new Tauler(t);
+                aux.afegeix(i, color);
+                eval_act = min_value(aux, InfinitNegatiu, InfinitPositiu, profunditat, color);
+                System.out.println("accio -> "+i+" valor accio = "+eval_act);
+                if(eval_act > eval_ant){
+                    millor_mov = i;
+                    eval_ant = eval_act;
                 }
             }
         }
         System.out.println();
-        return millorColumna;
+        return millor_mov;
     }
 
-
-    /** Privats */
-    private Double alfaBeta(Tauler t, int jugador, int columnaAColocar, Double alpha, Double beta, int profunditat) {
-        if (beta <= alpha) {
-            if (jugador == 1) return InfinitPositiu;
-            return InfinitNegatiu;
-        }
-
-        if (t.solucio(columnaAColocar, jugador) || profunditat == 0 || !t.espotmoure()) {
-            return heuristica(t, jugador);
-        }
-
-        Double bestValue;
-
-        if (jugador == 1) {
-            bestValue = alpha;
-            for (int i = 0; i < t.getMida(); i++) {
-                if (t.movpossible(i)) {
-                    Tauler t1 = new Tauler(t);
-                    t1.afegeix(i, jugador);
-                    Double foo = alfaBeta(t1, oponent(jugador), i, bestValue, beta, profunditat - 1);
-                    bestValue = Math.max(bestValue, foo);
-                    if (beta <= bestValue) break;
-                }
-            }
-        } else {
-            bestValue = beta;
-            for (int i = 0; i < t.getMida(); i++) {
-                if (t.movpossible(i)) {
-                    Tauler t1 = new Tauler(t);
-                    t1.afegeix(i, jugador); 
-                    Double foo = alfaBeta(t1, oponent(jugador), i, alpha, bestValue, profunditat - 1);
-                    bestValue = Math.min(bestValue, foo);
-                    if (bestValue <= alpha) break;
-                }
+    private int min_value(Tauler t, int alfa, int beta, int nivell, int color){
+        if(nivell==0 || es_guanyador(t)[0]==1 || !t.espotmoure()) return evaluarTauler(t, color);
+        for(int i=0;i<8;i++){
+            if(t.movpossible(i)){
+                Tauler aux = new Tauler (t);
+                aux.afegeix(i, -color);
+                beta = Math.min(beta, max_value(aux,alfa,beta,nivell-1, color));
+                if(beta <= alfa) return beta;
             }
         }
-
-        return bestValue;
+        return beta;
     }
 
-    private boolean acabat(Tauler t, int jugador, int columnaAColocar, int profunditat) {
-        Boolean solucioTrobada  = t.solucio(columnaAColocar, jugador);
-        Boolean profunditatValida = profunditat > 0;
-        Boolean taulerComplet = !t.espotmoure();
-        return solucioTrobada || !profunditatValida || taulerComplet;
+    private int max_value(Tauler t, int alfa, int beta, int nivell, int color){
+        if(nivell==0 || es_guanyador(t)[0]==1 || !t.espotmoure()) return evaluarTauler(t,color);
+        for(int i=0;i<8;i++){
+            if(t.movpossible(i)){
+                Tauler aux = new Tauler (t);
+                aux.afegeix(i, color);
+                alfa = Math.max(alfa, min_value(aux, alfa, beta, nivell-1, color));
+                if(alfa >= beta) return alfa;
+            }
+        }
+        return alfa;
     }
 
+
+
+    private float alphaBeta(Tauler t, int color, int prof, float alfa, float beta) {
+        if (prof == 0 || !t.espotmoure() || es_guanyador(t)[0] == 1){
+            return evaluarTauler(t, color);
+        }
+        for (int i = 0; i < t.getMida(); ++i) {
+            if (t.movpossible(i)) {
+                Tauler aux = new Tauler(t);
+                aux.afegeix(i, color);
+                alfa = Math.max(alfa, -alphaBeta(aux, oponent(color), prof - 1, -beta, -alfa));
+                if (beta <= alfa) {
+                    return alfa;
+                }
+            } else {
+                alfa = evaluarTauler(t, color);
+            }
+        }
+        return alfa;
+    }
 
     private int oponent(int jugador) {
         return -jugador;
     }
 
-/*    private Double heuristica(Tauler t, int jugador) {
-        Double base = 128.0;
-        Double suma = 0.0;
-        int mida = t.getMida();
-        for (int i = 0; i < mida; i++) {
-            for (int j = 0; j < mida; j++) {
-                if (t.getColor(i, j) == 0) continue;
-                if (t.getColor(i, j) == jugador) {
-                    suma += evaluacions[i][j];
-                } else {
-                    suma -= evaluacions[i][j];
+    private int evaluarTauler(Tauler t, int jugador) {
+        int[] guanyador = es_guanyador(t);
+        if (guanyador[0] == 1) return (guanyador[1] * InfinitPositiu);
+
+        int aiScore = 1;
+        int score = 0;
+        int blanks = 0;
+        int k;
+        int moreMoves = 0;
+        for (int i = t.getMida()-1; i >= 0; i--) {
+            for (int j = 0; j < t.getMida(); j++) {
+
+                if (t.getColor(i, j) == 0 || t.getColor(i, j) == jugador) continue;
+                if (j <= 3) {
+                    for (k = 1; k < 4; ++k) {
+                        if (t.getColor(i, j+k) == oponent(jugador)) aiScore++;
+                        else if(t.getColor(i, j+k) == jugador) {
+                            aiScore = 0;
+                            blanks = 0;
+                            break;
+                        } else blanks++;
+                    }
+
+                    moreMoves = 0;
+                    if (blanks > 0) {
+                        for (int c = 1; c < 4; ++c) {
+                            int column = j+c;
+                            for (int m = i; m <= 5; m++) {
+                                if (t.getColor(m, column) == 0) moreMoves++;
+                                else break;
+                            }
+                        }
+                    }
+
+                    if (moreMoves != 0) score += calculateScore(aiScore, moreMoves);
+                    aiScore = 1;
+                    blanks = 0;
+                }
+
+                if (i >= 3) {
+                    for (k = 1; k < 4; ++k) {
+                        if (t.getColor(i - k, j) == oponent(jugador)) aiScore++;
+                        else if (t.getColor(i - k, j) == jugador) {
+                            aiScore = 0;
+                            break;
+                        }
+                    }
+                    moreMoves = 0;
+
+                    if (aiScore > 0) {
+                        int column = j;
+                        for (int m = i-k+1; m <= i-1 ; m++) {
+                            if (t.getColor(m, column) == 0) moreMoves++;
+                            else break;
+                        }
+                    }
+                }
+                if (moreMoves != 0) score += calculateScore(aiScore, moreMoves);
+                aiScore = 1;
+                blanks = 0;
+                if (j >= 3) {
+                    for (k = 1; k < 4; ++k) {
+                        if (t.getColor(i, j-k) == oponent(jugador)) aiScore++;
+                        else if (t.getColor(i, j - k) == jugador) {
+                            aiScore = 0;
+                            blanks = 0;
+                            break;
+                        } else blanks++;
+                    }
+                    moreMoves = 0;
+                    if (blanks > 0) {
+                        for (int c = 1; c < 4; c++) {
+                            int column = j - c;
+                            for (int m = i; m <= 5; m++) {
+                                if (t.getColor(m, column) == 0) moreMoves++;
+                                else break;
+                            }
+                        }
+                    }
+                    if (moreMoves != 0) score += calculateScore(aiScore, moreMoves);
+                    aiScore = 1;
+                    blanks = 0;
+                }
+
+                if (j <= 3 && i >= 3) {
+                    for (k = 1; k < 4; ++k) {
+                        if (t.getColor(i-k, j+k) == oponent(jugador)) aiScore++;
+                        else if (t.getColor(i-k, j+k) == jugador) {
+                            aiScore = 0;
+                            blanks = 0;
+                            break;
+                        } else blanks++;
+                    }
+                    moreMoves = 0;
+                    if (blanks > 0) {
+                        for (int c = 1; c < 4; ++c) {
+                            int column = j+c, row = i-c;
+                            for (int m = row; m <= 5; ++m) {
+                                if (t.getColor(m, column) == 0) moreMoves++;
+                                else if(t.getColor(m, column) == -1);
+                                else break;
+                            }
+                        }
+                        if (moreMoves != 0) score += calculateScore(aiScore, moreMoves);
+                        aiScore = 1;
+                        blanks = 0;
+                    }
+                }
+
+                if (i >= 3 && j >= 3) {
+                    for (k = 1; k < 4; ++k) {
+                        if (t.getColor(i-k, j-k) == oponent(jugador)) aiScore++;
+                        else if (t.getColor(i-k, j-k) == jugador) {
+                            aiScore = 0;
+                            blanks = 0;
+                            break;
+                        } else blanks++;
+                    }
+
+                    moreMoves = 0;
+                    if (blanks > 0) {
+                        for (int c = 1; c < 4; ++c) {
+                            int column = j-c, row = i-c;
+                            for (int m = row; m <= 5 ; ++m) {
+                                if (t.getColor(m, column) == 0) moreMoves++;
+                                else if(t.getColor(m, column) == oponent(jugador));
+                                else  break;
+                            }
+                        }
+                        if (moreMoves != 0) score += calculateScore(aiScore, moreMoves);
+                        aiScore = 1;
+                        blanks = 0;
+                    }
                 }
             }
         }
-        return base + suma;
+        return score;
+    }
+
+    int calculateScore(int aiScore, int moreMoves){
+        int moveScore = 4 - moreMoves;
+        if(aiScore==0) return 0;
+        else if(aiScore==1) return 1*moveScore;
+        else if(aiScore==2) return 10*moveScore;
+        else if(aiScore==3) return 100*moveScore;
+        else return 1000;
+    }
+
+
+    /*private boolean es_guanyador(Tauler t){
+
+        for (int j = 0; j<t.getMida()-3 ; j++ ){
+            for (int i = 0; i<t.getMida(); i++){
+                if (t.getColor(i,j) == 1 && t.getColor(i,j+1) == 1 && t.getColor(i,j+2) == 1 && t.getColor(i,j+3) == 1){
+                    return true;
+                }
+                else if (t.getColor(i,j) == -1 && t.getColor(i,j+1) == -1 && t.getColor(i,j+2) == -1 && t.getColor(i,j+3) == -1){
+                    return true;
+                }
+            }
+        }
+        for (int i = 0; i<t.getMida()-3 ; i++ ){
+            for (int j = 0; j<t.getMida(); j++){
+                if (t.getColor(i,j) == 1 && t.getColor(i+1,j) == 1 && t.getColor(i+2,j) == 1 && t.getColor(i+3,j) == 1){
+                    return true;
+                }
+                else if (t.getColor(i,j) == -1 && t.getColor(i+1,j) == -1 && t.getColor(i+2,j) == -1 && t.getColor(i+3,j) == -1){
+                    return true;
+                }
+            }
+        }
+        for (int i=3; i<t.getMida(); i++){
+            for (int j=0; j<t.getMida()-3; j++){
+                if (t.getColor(i,j) == 1 && t.getColor(i-1,j+1) == 1 && t.getColor(i-2,j+2) == 1 && t.getColor(i-3, j+3) == 1) {
+                    return true;
+                }
+                else if (t.getColor(i,j) == -1 && t.getColor(i-1,j+1) == -1 && t.getColor(i-2,j+2) == -1 && t.getColor(i-3, j+3) == -1) {
+                    return true;
+                }
+
+            }
+        }
+        for (int i=3; i<t.getMida(); i++){
+            for (int j=3; j<t.getMida(); j++) {
+                if (t.getColor(i, j) == 1 && t.getColor(i - 1, j - 1) == 1 && t.getColor(i - 2, j - 2) == 1 && t.getColor(i - 3, j - 3)==1){
+                    return true;
+                }
+                else if (t.getColor(i, j) == -1 && t.getColor(i - 1, j - 1) == -1 && t.getColor(i - 2, j - 2) == -1 && t.getColor(i - 3, j - 3) == -1){
+                    return true;
+                }
+            }
+        }
+        return false;
     }*/
-
-    private Double getPuntuacioPosicio (Tauler t, int fila, int columna, int movx, int movy, int jugador){
-        Double puntsJugador = 0.0;
-        for (int i = 0; i < 4; ++i){
-            if (t.getColor(fila, columna) == 0) continue;
-            if(t.getColor(fila,columna) == jugador){
-                puntsJugador += evaluacions[fila][columna];
-            } else {
-                puntsJugador -= evaluacions[fila][columna];
+    private int[] es_guanyador(Tauler t){
+        int[] res = {0,0};
+        boolean win=false;
+        int act=0;
+        //Comprova lineas Horitzontals
+        for(int fil=0;fil<8 && !win;fil++){
+            int cont=1, ant=0;
+            for(int col=0; col<8 && !win;col++){
+                act = t.getColor(fil, col);
+                if(ant==act && act != 0) {
+                    cont++;
+                    if(cont==4) win=true;
+                }
+                else cont=1;
+                ant=act;
             }
-            fila += movx;
-            columna += movy;
         }
-        return puntsJugador;
+        //Comprova lineas Verticals
+        for(int col=0;col<8 && !win;col++){
+            int cont=1, ant=0;
+            for(int fil=0; fil<8 && !win;fil++){
+                act = t.getColor(fil, col);
+                if(ant==act && act != 0) {
+                    cont++;
+                    if(cont==4) win=true;
+                }
+                else cont=1;
+                ant=act;
+            }
+        }
+        //Compara diagonals amunt
+        for(int fil=0;fil<5 && !win;fil++){
+            int cont=1, ant=0;
+            for(int col=0; col<(8-fil) && !win;col++){
+                act = t.getColor(fil+col, col);
+                if(ant==act && act != 0) {
+                    cont++;
+                    if(cont==4) win=true;
+                }
+                else cont=1;
+                ant=act;
+            }
+        }
+        for(int col=1;col<5 && !win;col++){
+            int cont=1, ant=0;
+            for(int fil=0; fil<(8-col) && !win;fil++){
+                act = t.getColor(fil, col+fil);
+                if(ant==act && act != 0) {
+                    cont++;
+                    if(cont==4) win=true;
+                }
+                else cont=1;
+                ant=act;
+            }
+        }
+        //Compara diagonals aball
+        for(int fil=7;fil>2 && !win;fil--){
+            int cont=1, ant=0;
+            for(int col=0; col<=fil && !win;col++){
+                act = t.getColor(fil-col, col);
+                if(ant==act && act != 0) {
+                    cont++;
+                    if(cont==4) win=true;
+                }
+                else cont=1;
+                ant=act;
+            }
+        }
+        for(int col=4;col>0 && !win;col--){
+            int cont=1, ant=0, n=0;
+            for(int fil=7; fil>=col && !win;fil--){
+                act = t.getColor(fil,n+col);
+                n++;
+                if(ant==act && act != 0) {
+                    cont++;
+                    if(cont==4) win=true;
+                }
+                else cont=1;
+                ant=act;
+            }
+        }
+        if(win==true){
+            res[0]=1;
+            res[1] = act;
+        }
+        return res;
     }
 
-    private Double heuristica (Tauler t, int jugador){
-
-        Double punts = 0.0;
-
-        for (int fila = 0; fila < t.getMida() - 3; ++fila) {
-            for (int columna = 0; columna < t.getMida(); ++columna) {
-                Double puntuacio_vertical = getPuntuacioPosicio(t, fila, columna, 1, 0, jugador);
-                punts += puntuacio_vertical;
-            }
-        }
-
-        for (int fila = 0; fila < t.getMida(); ++fila) {
-            for (int columna = 0; columna < t.getMida() - 3; ++columna) {
-                Double puntuacio_horitzontal = getPuntuacioPosicio(t, fila, columna, 0, 1, jugador);
-                punts += puntuacio_horitzontal;
-            }
-        }
-
-        for (int fila = 0; fila < t.getMida() - 3; ++fila) {
-            for (int columna = 0; columna < t.getMida() - 3; ++columna) {
-                Double puntuacio_diagonal_izq = getPuntuacioPosicio(t, fila, columna, 1, 1,jugador);
-                punts += puntuacio_diagonal_izq;
-            }
-        }
-        for (int fila = 3; fila < t.getMida(); ++fila) {
-            for (int columna = 0; columna <= t.getMida() - 4; columna++) {
-                Double puntuacio_diagonal_dreta = getPuntuacioPosicio(t, fila, columna, -1, 1, jugador);
-                punts += puntuacio_diagonal_dreta;
-            }
-        }
-        return punts;
-    }
 }
