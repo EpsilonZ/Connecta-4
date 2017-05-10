@@ -7,6 +7,19 @@ public class Player implements Jugador {
     private class Resultat {
         public boolean esTaulerGuanyador;
         public int jugadorGuanyador;
+
+        public Resultat(boolean esTaulerGuanyador, int jugadorGuanyador) {
+            this.esTaulerGuanyador = esTaulerGuanyador;
+            this.jugadorGuanyador = jugadorGuanyador;
+        }
+
+        @Override
+        public String toString() {
+            return "Resultat{" +
+                    "esTaulerGuanyador=" + esTaulerGuanyador +
+                    ", jugadorGuanyador=" + jugadorGuanyador +
+                    '}';
+        }
     }
 
     /**
@@ -232,7 +245,7 @@ public class Player implements Jugador {
      * @return
      */
     private int min_value(Tauler t, int alfa, int beta, int nivell, int color){
-        if(nivell==0 || es_guanyador(t)[0]==1 || !t.espotmoure()) return evaluarTauler(t, color);
+        if(nivell==0 || tauler_guanyador(t).esTaulerGuanyador || !t.espotmoure()) return evaluarTauler(t, color);
         for(int i=0;i<t.getMida();i++){
             if(t.movpossible(i)){
                 Tauler aux = new Tauler (t);
@@ -253,7 +266,7 @@ public class Player implements Jugador {
      * @return
      */
     private int max_value(Tauler t, int alfa, int beta, int nivell, int color){
-        if(nivell==0 || es_guanyador(t)[0]==1 || !t.espotmoure()) return evaluarTauler(t,color);
+        if(nivell==0 || tauler_guanyador(t).esTaulerGuanyador || !t.espotmoure()) return evaluarTauler(t,color);
         for(int i=0;i<t.getMida();i++){
             if(t.movpossible(i)){
                 Tauler aux = new Tauler (t);
@@ -273,8 +286,6 @@ public class Player implements Jugador {
         return -jugador;
     }
 
-
-
     /**
      * @param t
      * @param fil
@@ -289,10 +300,6 @@ public class Player implements Jugador {
         int j;
         int contador;
 
-        Resultat r = new Resultat();
-        r.esTaulerGuanyador = false;
-        r.jugadorGuanyador = jugador;
-
         //Mirar adalt -> Tests OK
         contador = 1;
         for (int i = fil+1; i < maximMajor && i <= fil+3; i++) {
@@ -300,8 +307,7 @@ public class Player implements Jugador {
         }
 
         if (contador == pecesPerGuanyar) {
-            r.esTaulerGuanyador = true;
-            return r;
+            return new Resultat(true, jugador);
         }
 
         //Mirar diagonal adalt dreta -> Tests OK
@@ -312,8 +318,7 @@ public class Player implements Jugador {
         }
 
         if (contador == pecesPerGuanyar) {
-            r.esTaulerGuanyador = true;
-            return r;
+            return new Resultat(true, jugador);
         }
 
         //Mirar dreta -> Tests OK
@@ -323,8 +328,7 @@ public class Player implements Jugador {
         }
 
         if (contador == pecesPerGuanyar) {
-            r.esTaulerGuanyador = true;
-            return r;
+            return new Resultat(true, jugador);
         }
 
         //Mirar diagonal adalt esquerra -> Tests OK
@@ -335,11 +339,9 @@ public class Player implements Jugador {
         }
 
         if (contador == pecesPerGuanyar) {
-            r.esTaulerGuanyador = true;
-            return r;
+            return new Resultat(true, jugador);
         }
-
-        return r;
+        return new Resultat(false, 0);
     }
 
     /**
@@ -347,11 +349,11 @@ public class Player implements Jugador {
      * @return
      */
     private Resultat tauler_guanyador(Tauler t) {
-        Resultat resultat = new Resultat();
+        Resultat resultat = new Resultat(false, 0);
         for (int i = 0; i < t.getMida(); i++) {
             for (int j = 0; j < t.getMida(); j++) {
                 if (t.getColor(i, j) == 0) continue;
-                resultat = casellaGuanyadora(t, j, j);
+                resultat = casellaGuanyadora(t, i, j);
                 if (resultat.esTaulerGuanyador) return resultat;
             }
         }
@@ -361,108 +363,14 @@ public class Player implements Jugador {
 
     /**
      * @param t
-     * @return
-     */
-    private int[] es_guanyador(Tauler t){
-        int[] res = {0,0};
-        boolean win=false;
-        int act=0;
-        //Comprova lineas Horitzontals
-        for(int fil=0;fil<8 && !win;fil++){
-            int cont=1, ant=0;
-            for(int col=0; col<8 && !win;col++){
-                act = t.getColor(fil, col);
-                if(ant==act && act != 0) {
-                    cont++;
-                    if(cont==4) win=true;
-                }
-                else cont=1;
-                ant=act;
-            }
-        }
-        //Comprova lineas Verticals
-        for(int col=0;col<8 && !win;col++){
-            int cont=1, ant=0;
-            for(int fil=0; fil<8 && !win;fil++){
-                act = t.getColor(fil, col);
-                if(ant==act && act != 0) {
-                    cont++;
-                    if(cont==4) win=true;
-                }
-                else cont=1;
-                ant=act;
-            }
-        }
-        //Compara diagonals amunt
-        for(int fil=0;fil<5 && !win;fil++){
-            int cont=1, ant=0;
-            for(int col=0; col<(8-fil) && !win;col++){
-                act = t.getColor(fil+col, col);
-                if(ant==act && act != 0) {
-                    cont++;
-                    if(cont==4) win=true;
-                }
-                else cont=1;
-                ant=act;
-            }
-        }
-        for(int col=1;col<5 && !win;col++){
-            int cont=1, ant=0;
-            for(int fil=0; fil<(8-col) && !win;fil++){
-                act = t.getColor(fil, col+fil);
-                if(ant==act && act != 0) {
-                    cont++;
-                    if(cont==4) win=true;
-                }
-                else cont=1;
-                ant=act;
-            }
-        }
-        //Compara diagonals aball
-        for(int fil=7;fil>2 && !win;fil--){
-            int cont=1, ant=0;
-            for(int col=0; col<=fil && !win;col++){
-                act = t.getColor(fil-col, col);
-                if(ant==act && act != 0) {
-                    cont++;
-                    if(cont==4) win=true;
-                }
-                else cont=1;
-                ant=act;
-            }
-        }
-        for(int col=4;col>0 && !win;col--){
-            int cont=1, ant=0, n=0;
-            for(int fil=7; fil>=col && !win;fil--){
-                act = t.getColor(fil,n+col);
-                n++;
-                if(ant==act && act != 0) {
-                    cont++;
-                    if(cont==4) win=true;
-                }
-                else cont=1;
-                ant=act;
-            }
-        }
-        if(win==true){
-            res[0]=1;
-            res[1] = act;
-        }
-        return res;
-    }
-
-    /**
-     * @param t
      * @param jugador
      * @return
      */
     private int evaluarTauler(Tauler t, int jugador) {
-/*        int[] guanyador = es_guanyador(t);
-        if (guanyador[0] == 1) return (guanyador[1] * InfinitPositiu);*/
         Resultat r = tauler_guanyador(t);
         boolean guanyador = r.esTaulerGuanyador;
+
         if (guanyador) {
-            System.out.println(r.jugadorGuanyador);
             return r.jugadorGuanyador * InfinitPositiu;
         }
 
