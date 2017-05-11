@@ -361,8 +361,7 @@ public class Player implements Jugador {
         if (contador == pecesPerGuanyar) {
             return new Resultat(true, jugador, jugador * InfinitPositiu);
         }
-//        heuristicaCasella += calcularPuntuacio(contador, contadorBlancs);
-        heuristicaCasella = Math.max(calcularPuntuacio(contador, contadorBlancs), heuristicaCasella);
+        heuristicaCasella += contadorPonderat * calcularPuntuacio(contador, contadorBlancs);
 
         //Mirar diagonal adalt dreta -> Tests OK
         contador = 1;
@@ -379,8 +378,7 @@ public class Player implements Jugador {
         if (contador == pecesPerGuanyar) {
             return new Resultat(true, jugador, jugador * InfinitPositiu);
         }
-
-        heuristicaCasella = Math.max(calcularPuntuacio(contador, contadorBlancs), heuristicaCasella);
+        heuristicaCasella += contadorPonderat * calcularPuntuacio(contador, contadorBlancs);
 
         //Mirar dreta -> Tests OK
         contador = 1;
@@ -395,8 +393,7 @@ public class Player implements Jugador {
         if (contador == pecesPerGuanyar) {
             return new Resultat(true, jugador, jugador * InfinitPositiu);
         }
-
-        heuristicaCasella = Math.max(calcularPuntuacio(contador, contadorBlancs), heuristicaCasella);
+        heuristicaCasella += contadorPonderat * calcularPuntuacio(contador, contadorBlancs);
 
         //Mirar diagonal adalt esquerra -> Tests OK
         contador = 1;
@@ -414,7 +411,7 @@ public class Player implements Jugador {
             return new Resultat(true, jugador, jugador * InfinitPositiu);
         }
 
-        heuristicaCasella = Math.max(calcularPuntuacio(contador, contadorBlancs), heuristicaCasella);
+        heuristicaCasella += contadorPonderat * calcularPuntuacio(contador, contadorBlancs);
 
         return new Resultat(false, 0, jugador * heuristicaCasella);
     }
@@ -641,9 +638,9 @@ public class Player implements Jugador {
     int calcularPuntuacio(int puntuacio, int moviments){
         int puntuacioMoviments = 4 - moviments;
         if(puntuacio==0) return 0;
-        else if(puntuacio==1) return 1*puntuacio;
-        else if(puntuacio==2) return 10*puntuacio;
-        else if(puntuacio==3) return 100*puntuacio;
+        else if(puntuacio==1) return 1*puntuacioMoviments;
+        else if(puntuacio==2) return 10*puntuacioMoviments;
+        else if(puntuacio==3) return 100*puntuacioMoviments;
         else return 1000;
     }
 }
