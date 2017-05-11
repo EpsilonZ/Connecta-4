@@ -5,25 +5,20 @@
  */
 public class Player implements Jugador {
     private class Resultat {
-        public boolean esTaulerGuanyador;
+        public boolean esCasellaGuanyadora;
         public int jugadorGuanyador;
-        public int valorTauler = 0;
-
-        public Resultat(boolean esTaulerGuanyador, int jugadorGuanyador) {
-            this.esTaulerGuanyador = esTaulerGuanyador;
-            this.jugadorGuanyador = jugadorGuanyador;
-        }
+        public int valor = 0;
 
         public Resultat(boolean esTaulerGuanyador, int jugadorGuanyador, int valorTauler) {
-            this.esTaulerGuanyador = esTaulerGuanyador;
+            this.esCasellaGuanyadora = esTaulerGuanyador;
             this.jugadorGuanyador = jugadorGuanyador;
-            this.valorTauler = valorTauler;
+            this.valor = valorTauler;
         }
 
         @Override
         public String toString() {
             return "Resultat{" +
-                    "esTaulerGuanyador=" + esTaulerGuanyador +
+                    "esCasellaGuanyadora=" + esCasellaGuanyadora +
                     ", jugadorGuanyador=" + jugadorGuanyador +
                     '}';
         }
@@ -211,6 +206,7 @@ public class Player implements Jugador {
 
 
     }
+
     /**
      * @return
      */
@@ -252,7 +248,7 @@ public class Player implements Jugador {
      * @return
      */
     private int min_value(Tauler t, int alfa, int beta, int nivell, int color){
-        if(nivell==0 || tauler_guanyador(t).esTaulerGuanyador || !t.espotmoure()) return evaluarTauler(t, color);
+        if(nivell==0 || tauler_guanyador(t).esCasellaGuanyadora || !t.espotmoure()) return evaluarTauler(t, color);
         for(int i=0;i<t.getMida();i++){
             if(t.movpossible(i)){
                 Tauler aux = new Tauler (t);
@@ -273,7 +269,7 @@ public class Player implements Jugador {
      * @return
      */
     private int max_value(Tauler t, int alfa, int beta, int nivell, int color){
-        if(nivell==0 || tauler_guanyador(t).esTaulerGuanyador || !t.espotmoure()) return evaluarTauler(t,color);
+        if(nivell==0 || tauler_guanyador(t).esCasellaGuanyadora || !t.espotmoure()) return evaluarTauler(t,color);
         for(int i=0;i<t.getMida();i++){
             if(t.movpossible(i)){
                 Tauler aux = new Tauler (t);
@@ -295,11 +291,44 @@ public class Player implements Jugador {
 
     /**
      * @param t
-     * @param fil
-     * @param col
      * @return
      */
-    private Resultat casellaGuanyadora(Tauler t, int fil, int col) {
+    private Resultat tauler_guanyador(Tauler t) {
+        Resultat resultat = new Resultat(false, 0, 0);
+        for (int i = 0; i < t.getMida(); i++) {
+            for (int j = 0; j < t.getMida(); j++) {
+                if (t.getColor(i, j) == 0) continue;
+                resultat = evaluarCasella(t, i, j);
+                if (resultat.esCasellaGuanyadora) return resultat;
+            }
+        }
+
+        return resultat;
+    }
+
+    /**
+     * @param t
+     * @return
+     */
+    private Resultat tauler_guanyadorWIP(Tauler t) {
+        Resultat resultat = new Resultat(false, 0, 0);
+
+        int heurisitica = 0;
+
+        for (int i = 0; i < t.getMida(); i++) {
+            for (int j = 0; j < t.getMida(); j++) {
+                if (t.getColor(i, j) == 0) continue;
+                resultat = evaluarCasella(t, i, j);
+                if (resultat.esCasellaGuanyadora) return resultat;
+
+                heurisitica += resultat.valor;
+            }
+        }
+        resultat.valor = heurisitica;
+        return resultat;
+    }
+
+    private Resultat evaluarCasellaWIP(Tauler t, int fil, int col) {
         int maximMenor = -1;
         int maximMajor = t.getMida();
         int jugador = t.getColor(fil, col);
@@ -348,24 +377,65 @@ public class Player implements Jugador {
         if (contador == pecesPerGuanyar) {
             return new Resultat(true, jugador, jugador * InfinitPositiu);
         }
-        return new Resultat(false, 0);
+        return new Resultat(false, 0, 0);
     }
 
     /**
      * @param t
+     * @param fil
+     * @param col
      * @return
      */
-    private Resultat tauler_guanyador(Tauler t) {
-        Resultat resultat = new Resultat(false, 0);
-        for (int i = 0; i < t.getMida(); i++) {
-            for (int j = 0; j < t.getMida(); j++) {
-                if (t.getColor(i, j) == 0) continue;
-                resultat = casellaGuanyadora(t, i, j);
-                if (resultat.esTaulerGuanyador) return resultat;
-            }
+    private Resultat evaluarCasella(Tauler t, int fil, int col) {
+        int maximMenor = -1;
+        int maximMajor = t.getMida();
+        int jugador = t.getColor(fil, col);
+        int pecesPerGuanyar = 4;
+        int j;
+        int contador;
+
+        //Mirar adalt -> Tests OK
+        contador = 1;
+        for (int i = fil+1; i < maximMajor && i <= fil+3; i++) {
+            if (t.getColor(i, col) == jugador) contador++;
         }
 
-        return resultat;
+        if (contador == pecesPerGuanyar) {
+            return new Resultat(true, jugador, jugador * InfinitPositiu);
+        }
+
+        //Mirar diagonal adalt dreta -> Tests OK
+        contador = 1;
+        j = col+1;
+        for (int i = fil+1; i < maximMajor && j < maximMajor && i <= fil+3; i++) {
+            if (t.getColor(i, j++) == jugador) contador++;
+        }
+
+        if (contador == pecesPerGuanyar) {
+            return new Resultat(true, jugador, jugador * InfinitPositiu);
+        }
+
+        //Mirar dreta -> Tests OK
+        contador = 1;
+        for (int i = col+1; i < maximMajor && i <= col+3; i++) {
+            if (t.getColor(fil, i) == jugador) contador++;
+        }
+
+        if (contador == pecesPerGuanyar) {
+            return new Resultat(true, jugador, jugador * InfinitPositiu);
+        }
+
+        //Mirar diagonal adalt esquerra -> Tests OK
+        contador = 1;
+        j = col-1;
+        for (int i = fil+1; i < maximMajor && j > maximMenor && i <= fil+3; i++) {
+            if (t.getColor(i, j--) == jugador) contador++;
+        }
+
+        if (contador == pecesPerGuanyar) {
+            return new Resultat(true, jugador, jugador * InfinitPositiu);
+        }
+        return new Resultat(false, 0, 0);
     }
 
     /**
@@ -375,11 +445,9 @@ public class Player implements Jugador {
      */
     private int evaluarTauler(Tauler t, int jugador) {
         Resultat r = tauler_guanyador(t);
-        boolean guanyador = r.esTaulerGuanyador;
+        boolean guanyador = r.esCasellaGuanyadora;
 
-        if (guanyador) {
-            return r.valorTauler;
-        }
+        if (guanyador) return r.valor;
 
         int puntuacioOponent = 1;
         int score = 0;
@@ -518,17 +586,11 @@ public class Player implements Jugador {
     }
 
     private int evaluarTaulerWIP(Tauler t, int jugador) {
-        Resultat r = tauler_guanyador(t);
-        boolean guanyador = r.esTaulerGuanyador;
+        Resultat r = tauler_guanyadorWIP(t);
+        boolean guanyador = r.esCasellaGuanyadora;
         if (guanyador) return r.jugadorGuanyador * InfinitPositiu;
 
-        for (int i = 0; i < t.getMida(); i++) {
-            for (int j = 0; j < t.getMida() ; j++) {
-                if (t.getColor(i, j) == 0) continue;
-
-            }
-        }
-        return 0;
+        return r.valor;
     }
     /**
      * @param puntuacio
