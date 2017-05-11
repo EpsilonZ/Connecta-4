@@ -41,6 +41,7 @@ public class Player implements Jugador {
             {4,6,8,10,10,8,6,4},
             {3,4,5,7,7,5,4,3},
     };
+    private int[] Weights = new int[] { 1, 5, 100, 10000, 2, 6, 200, 15000 };
 
     /**
      * Constructor
@@ -258,7 +259,7 @@ public class Player implements Jugador {
      * @return
      */
     private int min_value(Tauler t, int alfa, int beta, int nivell, int color){
-        if(nivell==0 || tauler_guanyador(t).esCasellaGuanyadora || !t.espotmoure()) return evaluarTaulerWIP(t, color);
+        if(nivell==0 || tauler_guanyador(t).esCasellaGuanyadora || !t.espotmoure()) return heuristica(t, color);
         for(int i=0;i<t.getMida();i++){
             if(t.movpossible(i)){
                 Tauler aux = new Tauler (t);
@@ -279,7 +280,7 @@ public class Player implements Jugador {
      * @return
      */
     private int max_value(Tauler t, int alfa, int beta, int nivell, int color){
-        if(nivell==0 || tauler_guanyador(t).esCasellaGuanyadora || !t.espotmoure()) return evaluarTaulerWIP(t,color);
+        if(nivell==0 || tauler_guanyador(t).esCasellaGuanyadora || !t.espotmoure()) return heuristica(t,color);
         for(int i=0;i<t.getMida();i++){
             if(t.movpossible(i)){
                 Tauler aux = new Tauler (t);
@@ -642,5 +643,83 @@ public class Player implements Jugador {
         else if(puntuacio==2) return 10*puntuacioMoviments;
         else if(puntuacio==3) return 100*puntuacioMoviments;
         else return 1000;
+    }
+
+    private int CheckLine(int[] vals, int jugador)
+    {
+        int score = 0;
+        for (int i = 0; i < vals.length - 3; i++)
+        {
+            //Examine each opportunity
+            int c = 0;
+            int p = 0;
+            for (int j = 0; j < 4; j++)
+                if (vals[i + j] == jugador) c++; //TODO Make sure that it looks at it's own identity
+                else if (vals[i + j] !=0 ) p++;
+            if ((c > 0) && (p == 0))
+            {
+                //Computer opportunity
+                if (c == 4) return Weights[3]; //Win
+                score += ((c/3)*Weights[2]) + ((c/2)*Weights[1]) + Weights[0];
+            }
+            else if ((c == 0) && (p > 0))
+            {
+                //Player opportunity
+                if (p == 4) return -1*Weights[7]; //Win
+                score -= ((p / 3) * Weights[6]) + ((p / 2) * Weights[5]) + Weights[4];
+            }
+        }
+        return score;
+    }
+
+    private int heuristica(Tauler t, int jugador)
+    {
+        Resultat guanyador = tauler_guanyador(t);
+        if (guanyador.esCasellaGuanyadora){
+            return guanyador.jugadorGuanyador * InfinitPositiu;
+        }
+        int score = 0;
+        //Eval Horizontal
+        for (int i = 0; i < 6; i++)
+        {
+            int[] aux = new int[] {t.getColor(0,i), t.getColor(1,i), t.getColor(2,i), t.getColor(3,i), t.getColor(4,i),t.getColor(5,i), t.getColor(6,i)};
+            score += CheckLine(aux, jugador);
+        }
+
+        //Eval Vertical
+        for (int i = 0; i < 7; i++)
+        {
+            int[] aux = new int[] {t.getColor(i,0), t.getColor(i,1), t.getColor(i,2), t.getColor(i,3), t.getColor(i,4),t.getColor(i,5), t.getColor(i,6)};
+            score += CheckLine(aux,jugador);
+        }
+
+        //Eval Diagonal
+        int[] aux = new int[] {t.getColor(0,2),t.getColor(1,3),t.getColor(2,4), t.getColor(3,5)};
+        score += CheckLine(aux,jugador);
+        int[] aux1 = new int [] {t.getColor(0,1),t.getColor(1,2),t.getColor(2,3), t.getColor(3,4), t.getColor(4,5)};
+        score += CheckLine(aux1,jugador);
+        int [] aux2 = new int[] {t.getColor(0,0), t.getColor(1,1), t.getColor(2,2), t.getColor(3,3), t.getColor(4,4), t.getColor(5,5)};
+        score += CheckLine(aux2,jugador);
+        int [] aux3 = new int[] {t.getColor(1,0), t.getColor(2,1), t.getColor(3,2), t.getColor(4,3), t.getColor(5,4),t.getColor(6,5)};
+        score += CheckLine(aux3,jugador);
+        int [] aux4 = new int[] {t.getColor(2,0), t.getColor(3,1), t.getColor(4,2), t.getColor(5,3), t.getColor(6,4)};
+        score += CheckLine(aux4,jugador);
+        int [] aux5 = new int[] {t.getColor(3,0),t.getColor(4,1),t.getColor(5,2),t.getColor(6,3)};
+        score += CheckLine(aux5,jugador);
+
+        //Eval Diagonal 2
+        int[] aux6 = new int[] {t.getColor(3,0), t.getColor(2,1), t.getColor(1,2), t.getColor(0,3)};
+        score += CheckLine(aux6,jugador);
+        int[] aux7 = new int[] {t.getColor(4,0), t.getColor(3,1), t.getColor(2,2), t.getColor(1,3), t.getColor(0,4)};
+        score += CheckLine(aux7,jugador);
+        int[] aux8 = new int[] {t.getColor(5,0), t.getColor(4,1), t.getColor(3,2), t.getColor(2,3), t.getColor(1,4), t.getColor(0,5)};
+        score += CheckLine(aux8,jugador);
+        int [] aux9 = new int[] {t.getColor(6,0), t.getColor(5,1), t.getColor(4,2), t.getColor(3,3), t.getColor(2,4), t.getColor(1,5)};
+        score += CheckLine(aux9,jugador);
+        int [] aux10 = new int[] {t.getColor(6,1), t.getColor(5,2), t.getColor(4,3),t.getColor(3,4),t.getColor(2,5)};
+        score += CheckLine(aux10,jugador);
+        int [] aux11 = new int[] {t.getColor(6,2), t.getColor(5,3),t.getColor(4,4),t.getColor(3,5)};
+        score += CheckLine(aux11,jugador);
+        return score;
     }
 }
