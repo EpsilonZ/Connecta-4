@@ -31,6 +31,16 @@ public class Player implements Jugador {
     private Integer InfinitNegatiu = -InfinitPositiu;
     private String nom = "El puto amo";
     private int profunditat = 6;
+    private static int[][] evaluacions = {
+            {3,4,5,7,7,5,4,3},
+            {4,6,8,10,10,8,6,4},
+            {5,8,11,13,13,11,8,5},
+            {6,10,14,16,16,14,10,6},
+            {6,10,14,16,16,14,10,6},
+            {5,8,11,13,13,11,8,5},
+            {4,6,8,10,10,8,6,4},
+            {3,4,5,7,7,5,4,3},
+    };
 
     /**
      * Constructor
@@ -248,7 +258,7 @@ public class Player implements Jugador {
      * @return
      */
     private int min_value(Tauler t, int alfa, int beta, int nivell, int color){
-        if(nivell==0 || tauler_guanyador(t).esCasellaGuanyadora || !t.espotmoure()) return evaluarTauler(t, color);
+        if(nivell==0 || tauler_guanyador(t).esCasellaGuanyadora || !t.espotmoure()) return evaluarTaulerWIP(t, color);
         for(int i=0;i<t.getMida();i++){
             if(t.movpossible(i)){
                 Tauler aux = new Tauler (t);
@@ -269,7 +279,7 @@ public class Player implements Jugador {
      * @return
      */
     private int max_value(Tauler t, int alfa, int beta, int nivell, int color){
-        if(nivell==0 || tauler_guanyador(t).esCasellaGuanyadora || !t.espotmoure()) return evaluarTauler(t,color);
+        if(nivell==0 || tauler_guanyador(t).esCasellaGuanyadora || !t.espotmoure()) return evaluarTaulerWIP(t,color);
         for(int i=0;i<t.getMida();i++){
             if(t.movpossible(i)){
                 Tauler aux = new Tauler (t);
@@ -318,12 +328,13 @@ public class Player implements Jugador {
         for (int i = 0; i < t.getMida(); i++) {
             for (int j = 0; j < t.getMida(); j++) {
                 if (t.getColor(i, j) == 0) continue;
-                resultat = evaluarCasella(t, i, j);
+                resultat = evaluarCasellaWIP(t, i, j);
                 if (resultat.esCasellaGuanyadora) return resultat;
 
                 heurisitica += resultat.valor;
             }
         }
+
         resultat.valor = heurisitica;
         return resultat;
     }
@@ -334,50 +345,78 @@ public class Player implements Jugador {
         int jugador = t.getColor(fil, col);
         int pecesPerGuanyar = 4;
         int j;
-        int contador;
+        int contador, contadorBlancs, contadorPonderat;
+        int heuristicaCasella = 0;
 
         //Mirar adalt -> Tests OK
         contador = 1;
+        contadorBlancs = 0;
+        contadorPonderat = 0;
         for (int i = fil+1; i < maximMajor && i <= fil+3; i++) {
             if (t.getColor(i, col) == jugador) contador++;
+            else if (t.getColor(i, col) == 0) contadorBlancs++;
+            contadorPonderat += evaluacions[i][col];
         }
 
         if (contador == pecesPerGuanyar) {
             return new Resultat(true, jugador, jugador * InfinitPositiu);
         }
+//        heuristicaCasella += calcularPuntuacio(contador, contadorBlancs);
+        heuristicaCasella = Math.max(calcularPuntuacio(contador, contadorBlancs), heuristicaCasella);
 
         //Mirar diagonal adalt dreta -> Tests OK
         contador = 1;
+        contadorBlancs = 0;
+        contadorPonderat = 0;
         j = col+1;
         for (int i = fil+1; i < maximMajor && j < maximMajor && i <= fil+3; i++) {
-            if (t.getColor(i, j++) == jugador) contador++;
+            if (t.getColor(i, j) == jugador) contador++;
+            else if (t.getColor(i, j) == 0) contadorBlancs++;
+            contadorPonderat += evaluacions[i][j];
+            j++;
         }
 
         if (contador == pecesPerGuanyar) {
             return new Resultat(true, jugador, jugador * InfinitPositiu);
         }
+
+        heuristicaCasella = Math.max(calcularPuntuacio(contador, contadorBlancs), heuristicaCasella);
 
         //Mirar dreta -> Tests OK
         contador = 1;
+        contadorBlancs = 0;
+        contadorPonderat = 0;
         for (int i = col+1; i < maximMajor && i <= col+3; i++) {
             if (t.getColor(fil, i) == jugador) contador++;
+            else if (t.getColor(fil, i) == 0) contadorBlancs++;
+            contadorPonderat += evaluacions[fil][i];
         }
 
         if (contador == pecesPerGuanyar) {
             return new Resultat(true, jugador, jugador * InfinitPositiu);
         }
+
+        heuristicaCasella = Math.max(calcularPuntuacio(contador, contadorBlancs), heuristicaCasella);
 
         //Mirar diagonal adalt esquerra -> Tests OK
         contador = 1;
+        contadorBlancs = 0;
+        contadorPonderat = 0;
         j = col-1;
         for (int i = fil+1; i < maximMajor && j > maximMenor && i <= fil+3; i++) {
-            if (t.getColor(i, j--) == jugador) contador++;
+            if (t.getColor(i, j) == jugador) contador++;
+            else if (t.getColor(i, j) == 0) contadorBlancs++;
+            contadorPonderat += evaluacions[i][j];
+            j--;
         }
 
         if (contador == pecesPerGuanyar) {
             return new Resultat(true, jugador, jugador * InfinitPositiu);
         }
-        return new Resultat(false, 0, 0);
+
+        heuristicaCasella = Math.max(calcularPuntuacio(contador, contadorBlancs), heuristicaCasella);
+
+        return new Resultat(false, 0, jugador * heuristicaCasella);
     }
 
     /**
@@ -387,12 +426,14 @@ public class Player implements Jugador {
      * @return
      */
     private Resultat evaluarCasella(Tauler t, int fil, int col) {
+        int pecesPerGuanyar = 4;
         int maximMenor = -1;
         int maximMajor = t.getMida();
+
         int jugador = t.getColor(fil, col);
-        int pecesPerGuanyar = 4;
         int j;
         int contador;
+
 
         //Mirar adalt -> Tests OK
         contador = 1;
@@ -600,9 +641,9 @@ public class Player implements Jugador {
     int calcularPuntuacio(int puntuacio, int moviments){
         int puntuacioMoviments = 4 - moviments;
         if(puntuacio==0) return 0;
-        else if(puntuacio==1) return 1*puntuacioMoviments;
-        else if(puntuacio==2) return 10*puntuacioMoviments;
-        else if(puntuacio==3) return 100*puntuacioMoviments;
+        else if(puntuacio==1) return 1*puntuacio;
+        else if(puntuacio==2) return 10*puntuacio;
+        else if(puntuacio==3) return 100*puntuacio;
         else return 1000;
     }
 }
