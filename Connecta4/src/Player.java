@@ -7,10 +7,17 @@ public class Player implements Jugador {
     private class Resultat {
         public boolean esTaulerGuanyador;
         public int jugadorGuanyador;
+        public int valorTauler = 0;
 
         public Resultat(boolean esTaulerGuanyador, int jugadorGuanyador) {
             this.esTaulerGuanyador = esTaulerGuanyador;
             this.jugadorGuanyador = jugadorGuanyador;
+        }
+
+        public Resultat(boolean esTaulerGuanyador, int jugadorGuanyador, int valorTauler) {
+            this.esTaulerGuanyador = esTaulerGuanyador;
+            this.jugadorGuanyador = jugadorGuanyador;
+            this.valorTauler = valorTauler;
         }
 
         @Override
@@ -307,7 +314,7 @@ public class Player implements Jugador {
         }
 
         if (contador == pecesPerGuanyar) {
-            return new Resultat(true, jugador);
+            return new Resultat(true, jugador, jugador * InfinitPositiu);
         }
 
         //Mirar diagonal adalt dreta -> Tests OK
@@ -318,7 +325,7 @@ public class Player implements Jugador {
         }
 
         if (contador == pecesPerGuanyar) {
-            return new Resultat(true, jugador);
+            return new Resultat(true, jugador, jugador * InfinitPositiu);
         }
 
         //Mirar dreta -> Tests OK
@@ -328,7 +335,7 @@ public class Player implements Jugador {
         }
 
         if (contador == pecesPerGuanyar) {
-            return new Resultat(true, jugador);
+            return new Resultat(true, jugador, jugador * InfinitPositiu);
         }
 
         //Mirar diagonal adalt esquerra -> Tests OK
@@ -339,7 +346,7 @@ public class Player implements Jugador {
         }
 
         if (contador == pecesPerGuanyar) {
-            return new Resultat(true, jugador);
+            return new Resultat(true, jugador, jugador * InfinitPositiu);
         }
         return new Resultat(false, 0);
     }
@@ -371,7 +378,7 @@ public class Player implements Jugador {
         boolean guanyador = r.esTaulerGuanyador;
 
         if (guanyador) {
-            return r.jugadorGuanyador * InfinitPositiu;
+            return r.valorTauler;
         }
 
         int puntuacioOponent = 1;
@@ -510,6 +517,19 @@ public class Player implements Jugador {
         return score;
     }
 
+    private int evaluarTaulerWIP(Tauler t, int jugador) {
+        Resultat r = tauler_guanyador(t);
+        boolean guanyador = r.esTaulerGuanyador;
+        if (guanyador) return r.jugadorGuanyador * InfinitPositiu;
+
+        for (int i = 0; i < t.getMida(); i++) {
+            for (int j = 0; j < t.getMida() ; j++) {
+                if (t.getColor(i, j) == 0) continue;
+
+            }
+        }
+        return 0;
+    }
     /**
      * @param puntuacio
      * @param moviments
