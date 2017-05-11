@@ -22,8 +22,8 @@
       <file leaf-file-name="Juga2.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Juga2.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="272" column="34" lean-forward="false" selection-start-line="272" selection-start-column="30" selection-end-line="272" selection-end-column="34" />
+            <state relative-caret-position="443">
+              <caret line="269" column="8" lean-forward="false" selection-start-line="269" selection-start-column="8" selection-end-line="269" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -34,27 +34,29 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2016">
-              <caret line="445" column="4" lean-forward="false" selection-start-line="445" selection-start-column="4" selection-end-line="445" selection-end-column="4" />
+            <state relative-caret-position="128">
+              <caret line="247" column="5" lean-forward="false" selection-start-line="247" selection-start-column="5" selection-end-line="247" selection-end-column="5" />
               <folding>
                 <element signature="class#Resultat#0;class#Player#0" expanded="false" />
                 <element signature="method#testTaulers#0;class#Player#0" expanded="false" />
                 <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
                 <element signature="docComment;method#moviment#0;class#Player#0" expanded="false" />
-                <element signature="docComment;method#min_value#0;class#Player#0" expanded="false" />
-                <element signature="method#min_value#0;class#Player#0" expanded="false" />
-                <element signature="docComment;method#max_value#0;class#Player#0" expanded="false" />
-                <element signature="docComment;method#tauler_guanyador#0;class#Player#0" expanded="false" />
+                <element signature="method#moviment#0;class#Player#0" expanded="false" />
+                <element signature="docComment;method#oponent#0;class#Player#0" expanded="false" />
+                <element signature="docComment;method#minimitzar#0;class#Player#0" expanded="false" />
+                <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
+                <element signature="docComment;method#maximitzar#0;class#Player#0" expanded="false" />
+                <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
+                <element signature="docComment;method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+                <element signature="method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+                <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
+                <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
                 <element signature="docComment;method#evaluarCasella#0;class#Player#0" expanded="false" />
                 <element signature="method#evaluarCasella#0;class#Player#0" expanded="false" />
                 <element signature="docComment;method#puntuarCasella#0;class#Player#0" expanded="false" />
                 <element signature="method#puntuarCasella#0;class#Player#0" expanded="false" />
-                <element signature="docComment;method#evaluarTaulerWIP#0;class#Player#0" expanded="false" />
                 <element signature="docComment;method#calcularPuntuacio#0;class#Player#0" expanded="false" />
                 <element signature="method#calcularPuntuacio#0;class#Player#0" expanded="false" />
-                <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
-                <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
-                <marker date="1494507037000" expanded="false" signature="7810:8186" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -100,8 +102,8 @@
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/Connect4AI.java" />
         <option value="$PROJECT_DIR$/src/AIPutaAMA.java" />
-        <option value="$PROJECT_DIR$/src/Player.java" />
         <option value="$PROJECT_DIR$/src/Juga2.java" />
+        <option value="$PROJECT_DIR$/src/Player.java" />
       </list>
     </option>
   </component>
@@ -442,7 +444,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24430642" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -477,7 +479,7 @@
           <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="16" />
+      <option name="time" value="21" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -507,20 +509,22 @@
             <element signature="method#testTaulers#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#moviment#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#min_value#0;class#Player#0" expanded="false" />
-            <element signature="method#min_value#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#max_value#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#tauler_guanyador#0;class#Player#0" expanded="false" />
+            <element signature="method#moviment#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#oponent#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#minimitzar#0;class#Player#0" expanded="false" />
+            <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#maximitzar#0;class#Player#0" expanded="false" />
+            <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+            <element signature="method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
+            <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#evaluarCasella#0;class#Player#0" expanded="false" />
             <element signature="method#evaluarCasella#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#puntuarCasella#0;class#Player#0" expanded="false" />
             <element signature="method#puntuarCasella#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#evaluarTaulerWIP#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#calcularPuntuacio#0;class#Player#0" expanded="false" />
             <element signature="method#calcularPuntuacio#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
-            <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
-            <marker date="1494507037000" expanded="false" signature="7810:8186" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -558,20 +562,22 @@
             <element signature="method#testTaulers#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#moviment#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#min_value#0;class#Player#0" expanded="false" />
-            <element signature="method#min_value#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#max_value#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#tauler_guanyador#0;class#Player#0" expanded="false" />
+            <element signature="method#moviment#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#oponent#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#minimitzar#0;class#Player#0" expanded="false" />
+            <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#maximitzar#0;class#Player#0" expanded="false" />
+            <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+            <element signature="method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
+            <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#evaluarCasella#0;class#Player#0" expanded="false" />
             <element signature="method#evaluarCasella#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#puntuarCasella#0;class#Player#0" expanded="false" />
             <element signature="method#puntuarCasella#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#evaluarTaulerWIP#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#calcularPuntuacio#0;class#Player#0" expanded="false" />
             <element signature="method#calcularPuntuacio#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
-            <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
-            <marker date="1494507037000" expanded="false" signature="7810:8186" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -609,20 +615,22 @@
             <element signature="method#testTaulers#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#moviment#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#min_value#0;class#Player#0" expanded="false" />
-            <element signature="method#min_value#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#max_value#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#tauler_guanyador#0;class#Player#0" expanded="false" />
+            <element signature="method#moviment#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#oponent#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#minimitzar#0;class#Player#0" expanded="false" />
+            <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#maximitzar#0;class#Player#0" expanded="false" />
+            <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+            <element signature="method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
+            <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#evaluarCasella#0;class#Player#0" expanded="false" />
             <element signature="method#evaluarCasella#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#puntuarCasella#0;class#Player#0" expanded="false" />
             <element signature="method#puntuarCasella#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#evaluarTaulerWIP#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#calcularPuntuacio#0;class#Player#0" expanded="false" />
             <element signature="method#calcularPuntuacio#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
-            <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
-            <marker date="1494507037000" expanded="false" signature="7810:8186" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -661,20 +669,22 @@
             <element signature="method#testTaulers#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#moviment#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#min_value#0;class#Player#0" expanded="false" />
-            <element signature="method#min_value#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#max_value#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#tauler_guanyador#0;class#Player#0" expanded="false" />
+            <element signature="method#moviment#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#oponent#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#minimitzar#0;class#Player#0" expanded="false" />
+            <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#maximitzar#0;class#Player#0" expanded="false" />
+            <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+            <element signature="method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
+            <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#evaluarCasella#0;class#Player#0" expanded="false" />
             <element signature="method#evaluarCasella#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#puntuarCasella#0;class#Player#0" expanded="false" />
             <element signature="method#puntuarCasella#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#evaluarTaulerWIP#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#calcularPuntuacio#0;class#Player#0" expanded="false" />
             <element signature="method#calcularPuntuacio#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
-            <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
-            <marker date="1494507037000" expanded="false" signature="7810:8186" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -713,20 +723,22 @@
             <element signature="method#testTaulers#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#moviment#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#min_value#0;class#Player#0" expanded="false" />
-            <element signature="method#min_value#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#max_value#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#tauler_guanyador#0;class#Player#0" expanded="false" />
+            <element signature="method#moviment#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#oponent#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#minimitzar#0;class#Player#0" expanded="false" />
+            <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#maximitzar#0;class#Player#0" expanded="false" />
+            <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+            <element signature="method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
+            <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#evaluarCasella#0;class#Player#0" expanded="false" />
             <element signature="method#evaluarCasella#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#puntuarCasella#0;class#Player#0" expanded="false" />
             <element signature="method#puntuarCasella#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#evaluarTaulerWIP#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#calcularPuntuacio#0;class#Player#0" expanded="false" />
             <element signature="method#calcularPuntuacio#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
-            <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
-            <marker date="1494507037000" expanded="false" signature="7810:8186" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -751,20 +763,22 @@
             <element signature="method#testTaulers#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#moviment#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#min_value#0;class#Player#0" expanded="false" />
-            <element signature="method#min_value#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#max_value#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#tauler_guanyador#0;class#Player#0" expanded="false" />
+            <element signature="method#moviment#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#oponent#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#minimitzar#0;class#Player#0" expanded="false" />
+            <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#maximitzar#0;class#Player#0" expanded="false" />
+            <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+            <element signature="method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
+            <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#evaluarCasella#0;class#Player#0" expanded="false" />
             <element signature="method#evaluarCasella#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#puntuarCasella#0;class#Player#0" expanded="false" />
             <element signature="method#puntuarCasella#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#evaluarTaulerWIP#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#calcularPuntuacio#0;class#Player#0" expanded="false" />
             <element signature="method#calcularPuntuacio#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
-            <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
-            <marker date="1494507037000" expanded="false" signature="7810:8186" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -790,20 +804,22 @@
             <element signature="method#testTaulers#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#moviment#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#min_value#0;class#Player#0" expanded="false" />
-            <element signature="method#min_value#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#max_value#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#tauler_guanyador#0;class#Player#0" expanded="false" />
+            <element signature="method#moviment#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#oponent#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#minimitzar#0;class#Player#0" expanded="false" />
+            <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#maximitzar#0;class#Player#0" expanded="false" />
+            <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+            <element signature="method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
+            <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#evaluarCasella#0;class#Player#0" expanded="false" />
             <element signature="method#evaluarCasella#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#puntuarCasella#0;class#Player#0" expanded="false" />
             <element signature="method#puntuarCasella#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#evaluarTaulerWIP#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#calcularPuntuacio#0;class#Player#0" expanded="false" />
             <element signature="method#calcularPuntuacio#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
-            <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
-            <marker date="1494507037000" expanded="false" signature="7810:8186" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -834,20 +850,22 @@
             <element signature="method#testTaulers#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#moviment#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#min_value#0;class#Player#0" expanded="false" />
-            <element signature="method#min_value#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#max_value#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#tauler_guanyador#0;class#Player#0" expanded="false" />
+            <element signature="method#moviment#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#oponent#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#minimitzar#0;class#Player#0" expanded="false" />
+            <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#maximitzar#0;class#Player#0" expanded="false" />
+            <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+            <element signature="method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
+            <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#evaluarCasella#0;class#Player#0" expanded="false" />
             <element signature="method#evaluarCasella#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#puntuarCasella#0;class#Player#0" expanded="false" />
             <element signature="method#puntuarCasella#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#evaluarTaulerWIP#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#calcularPuntuacio#0;class#Player#0" expanded="false" />
             <element signature="method#calcularPuntuacio#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
-            <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
-            <marker date="1494507037000" expanded="false" signature="7810:8186" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -887,20 +905,22 @@
             <element signature="method#testTaulers#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#moviment#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#min_value#0;class#Player#0" expanded="false" />
-            <element signature="method#min_value#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#max_value#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#tauler_guanyador#0;class#Player#0" expanded="false" />
+            <element signature="method#moviment#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#oponent#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#minimitzar#0;class#Player#0" expanded="false" />
+            <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#maximitzar#0;class#Player#0" expanded="false" />
+            <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+            <element signature="method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
+            <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#evaluarCasella#0;class#Player#0" expanded="false" />
             <element signature="method#evaluarCasella#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#puntuarCasella#0;class#Player#0" expanded="false" />
             <element signature="method#puntuarCasella#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#evaluarTaulerWIP#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#calcularPuntuacio#0;class#Player#0" expanded="false" />
             <element signature="method#calcularPuntuacio#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
-            <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
-            <marker date="1494507037000" expanded="false" signature="7810:8186" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -964,8 +984,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Juga2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="272" column="34" lean-forward="false" selection-start-line="272" selection-start-column="30" selection-end-line="272" selection-end-column="34" />
+        <state relative-caret-position="443">
+          <caret line="269" column="8" lean-forward="false" selection-start-line="269" selection-start-column="8" selection-end-line="269" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -974,27 +994,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2016">
-          <caret line="445" column="4" lean-forward="false" selection-start-line="445" selection-start-column="4" selection-end-line="445" selection-end-column="4" />
+        <state relative-caret-position="128">
+          <caret line="247" column="5" lean-forward="false" selection-start-line="247" selection-start-column="5" selection-end-line="247" selection-end-column="5" />
           <folding>
             <element signature="class#Resultat#0;class#Player#0" expanded="false" />
             <element signature="method#testTaulers#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#moviment#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#min_value#0;class#Player#0" expanded="false" />
-            <element signature="method#min_value#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#max_value#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#tauler_guanyador#0;class#Player#0" expanded="false" />
+            <element signature="method#moviment#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#oponent#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#minimitzar#0;class#Player#0" expanded="false" />
+            <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#maximitzar#0;class#Player#0" expanded="false" />
+            <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+            <element signature="method#esTaulerGuanyador#0;class#Player#0" expanded="false" />
+            <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
+            <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#evaluarCasella#0;class#Player#0" expanded="false" />
             <element signature="method#evaluarCasella#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#puntuarCasella#0;class#Player#0" expanded="false" />
             <element signature="method#puntuarCasella#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#evaluarTaulerWIP#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#calcularPuntuacio#0;class#Player#0" expanded="false" />
             <element signature="method#calcularPuntuacio#0;class#Player#0" expanded="false" />
-            <element signature="docComment;method#evaluarTauler#0;class#Player#0" expanded="false" />
-            <element signature="method#evaluarTauler#0;class#Player#0" expanded="false" />
-            <marker date="1494507037000" expanded="false" signature="7810:8186" ph="{...}" />
           </folding>
         </state>
       </provider>

@@ -267,10 +267,8 @@ public class Juga2 extends javax.swing.JFrame {
         });
         t = new Tauler(8);
 
-        //player1 = new Profe(6,true);
-        //player2 = new Aleatori();
-        player2 = new Player();
-        player1 = new Profe(6,true);
+        player1 = new Player();
+        player2 = new Profe(6,true);
     }
     
 

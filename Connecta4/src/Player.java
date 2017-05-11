@@ -29,7 +29,7 @@ public class Player implements Jugador {
      */
     private Integer InfinitPositiu = Integer.MAX_VALUE;
     private Integer InfinitNegatiu = -InfinitPositiu;
-    private String nom = "El puto amo";
+    private String nom = "The boss";
     private int profunditat = 6;
 
     /**
@@ -222,21 +222,29 @@ public class Player implements Jugador {
      */
     @Override
     public int moviment(Tauler t, int color) {
-        int eval_act, eval_ant = InfinitNegatiu, millor_mov = 0;
-        for(int i=0; i < t.getMida(); ++i){
+        int valorActual, millorValor = InfinitNegatiu, millor_columna = 0;
+        for(int i=0; i < t.getMida(); i++){
             if(t.movpossible(i)){
                 Tauler aux = new Tauler(t);
                 aux.afegeix(i, color);
-                eval_act = min_value(aux, InfinitNegatiu, InfinitPositiu, profunditat, color);
-                System.out.println("accio -> "+i+" valor accio = "+eval_act);
-                if(eval_act > eval_ant){
-                    millor_mov = i;
-                    eval_ant = eval_act;
+                valorActual = minimitzar(aux, InfinitNegatiu, InfinitPositiu, profunditat, color);
+                System.out.println("accio -> "+ i +" valor accio = "+valorActual);
+                if(valorActual > millorValor){
+                    millor_columna = i;
+                    millorValor = valorActual;
                 }
             }
         }
         System.out.println();
-        return millor_mov;
+        return millor_columna;
+    }
+
+    /**
+     * @param jugador
+     * @return
+     */
+    private int oponent(int jugador) {
+        return -jugador;
     }
 
     /**
@@ -247,13 +255,13 @@ public class Player implements Jugador {
      * @param jugador
      * @return
      */
-    private int min_value(Tauler t, int alfa, int beta, int profunditat, int jugador){
-        if(profunditat == 0 || tauler_guanyador(t).esGuanyador || !t.espotmoure()) return evaluarTaulerWIP(t, jugador);
+    private int minimitzar(Tauler t, int alfa, int beta, int profunditat, int jugador){
+        if(profunditat == 0 || esTaulerGuanyador(t).esGuanyador || !t.espotmoure()) return evaluarTauler(t, jugador);
         for(int i = 0; i < t.getMida(); i++){
             if(t.movpossible(i)){
                 Tauler aux = new Tauler(t);
                 aux.afegeix(i, oponent(jugador));
-                beta = Math.min(beta, max_value(aux, alfa, beta, profunditat-1, jugador));
+                beta = Math.min(beta, maximitzar(aux, alfa, beta, profunditat-1, jugador));
                 if(beta <= alfa) return beta;
             }
         }
@@ -268,42 +276,17 @@ public class Player implements Jugador {
      * @param jugador
      * @return
      */
-    private int max_value(Tauler t, int alfa, int beta, int profunditat, int jugador){
-        if(profunditat == 0 || tauler_guanyador(t).esGuanyador || !t.espotmoure()) return evaluarTaulerWIP(t,jugador);
+    private int maximitzar(Tauler t, int alfa, int beta, int profunditat, int jugador){
+        if(profunditat == 0 || esTaulerGuanyador(t).esGuanyador || !t.espotmoure()) return evaluarTauler(t,jugador);
         for(int i = 0 ;i < t.getMida(); i++){
             if(t.movpossible(i)){
                 Tauler aux = new Tauler (t);
                 aux.afegeix(i, jugador);
-                alfa = Math.max(alfa, min_value(aux, alfa, beta, profunditat-1, jugador));
+                alfa = Math.max(alfa, minimitzar(aux, alfa, beta, profunditat-1, jugador));
                 if(alfa >= beta) return alfa;
             }
         }
         return alfa;
-    }
-
-    /**
-     * @param jugador
-     * @return
-     */
-    private int oponent(int jugador) {
-        return -jugador;
-    }
-
-    /**
-     * @param t
-     * @return
-     */
-    private Resultat tauler_guanyador(Tauler t) {
-        Resultat resultat = new Resultat(false, 0, 0);
-        for (int i = 0; i < t.getMida(); i++) {
-            for (int j = 0; j < t.getMida(); j++) {
-                if (t.getColor(i, j) == 0) continue;
-                resultat = evaluarCasella(t, i, j);
-                if (resultat.esGuanyador) return resultat;
-            }
-        }
-
-        return resultat;
     }
 
     /**
@@ -321,6 +304,26 @@ public class Player implements Jugador {
             }
         }
         return resultat;
+    }
+
+    /**
+     * @param t
+     * @param jugador
+     * @return
+     */
+    private int evaluarTauler(Tauler t, int jugador) {
+        Resultat r = esTaulerGuanyador(t);
+        boolean guanyador = r.esGuanyador;
+        if (guanyador) return r.jugadorGuanyador * InfinitPositiu;
+
+        int heuristica = 0;
+        for (int i = 0; i < t.getMida(); i++) {
+            for (int j = 0; j < t.getMida(); j++) {
+                heuristica += puntuarCasella(t, i, j, jugador).valor;
+            }
+        }
+
+        return heuristica;
     }
 
     /**
@@ -444,26 +447,6 @@ public class Player implements Jugador {
     }
 
     /**
-     * @param t
-     * @param jugador
-     * @return
-     */
-    private int evaluarTaulerWIP(Tauler t, int jugador) {
-        Resultat r = esTaulerGuanyador(t);
-        boolean guanyador = r.esGuanyador;
-        if (guanyador) return r.jugadorGuanyador * InfinitPositiu;
-
-        int heuristica = 0;
-        for (int i = 0; i < t.getMida(); i++) {
-            for (int j = 0; j < t.getMida(); j++) {
-                heuristica += puntuarCasella(t, i, j, jugador).valor;
-            }
-        }
-
-        return heuristica;
-    }
-
-    /**
      * @param puntuacio
      * @param moviments
      * @return
@@ -476,153 +459,4 @@ public class Player implements Jugador {
         else if(puntuacio==3) return 100*puntuacioMoviments;
         else return 1000;
     }
-
-    /**
-     * @param t
-     * @param jugador
-     * @return
-     */
-    private int evaluarTauler(Tauler t, int jugador) {
-        Resultat r = tauler_guanyador(t);
-        boolean guanyador = r.esGuanyador;
-
-        if (guanyador) return r.valor;
-
-        int puntuacioOponent = 1;
-        int score = 0;
-        int blanks = 0;
-        int k;
-        int moreMoves = 0;
-        for (int i = t.getMida()-1; i >= 0; i--) {
-            for (int j = 0; j < t.getMida(); j++) {
-
-                if (t.getColor(i, j) == 0 || t.getColor(i, j) == jugador) continue;
-
-                if (j <= 3) {
-                    for (k = 1; k < 4; ++k) {
-                        if (t.getColor(i, j+k) == oponent(jugador)) puntuacioOponent++;
-                        else if(t.getColor(i, j+k) == jugador) {
-                            puntuacioOponent = 0;
-                            blanks = 0;
-                            break;
-                        } else blanks++;
-                    }
-
-                    moreMoves = 0;
-                    if (blanks > 0) {
-                        for (int c = 1; c < 4; ++c) {
-                            int column = j+c;
-                            for (int m = i; m <= 5; m++) {
-                                if (t.getColor(m, column) == 0) moreMoves++;
-                                else break;
-                            }
-                        }
-                    }
-
-                    if (moreMoves != 0) score += calcularPuntuacio(puntuacioOponent, moreMoves);
-                    puntuacioOponent = 1;
-                    blanks = 0;
-                }
-
-                if (i >= 3) {
-                    for (k = 1; k < 4; ++k) {
-                        if (t.getColor(i - k, j) == oponent(jugador)) puntuacioOponent++;
-                        else if (t.getColor(i - k, j) == jugador) {
-                            puntuacioOponent = 0;
-                            break;
-                        }
-                    }
-                    moreMoves = 0;
-
-                    if (puntuacioOponent > 0) {
-                        int column = j;
-                        for (int m = i-k+1; m <= i-1 ; m++) {
-                            if (t.getColor(m, column) == 0) moreMoves++;
-                            else break;
-                        }
-                    }
-                }
-                if (moreMoves != 0) score += calcularPuntuacio(puntuacioOponent, moreMoves);
-                puntuacioOponent = 1;
-                blanks = 0;
-                if (j >= 3) {
-                    for (k = 1; k < 4; ++k) {
-                        if (t.getColor(i, j-k) == oponent(jugador)) puntuacioOponent++;
-                        else if (t.getColor(i, j - k) == jugador) {
-                            puntuacioOponent = 0;
-                            blanks = 0;
-                            break;
-                        } else blanks++;
-                    }
-                    moreMoves = 0;
-                    if (blanks > 0) {
-                        for (int c = 1; c < 4; c++) {
-                            int column = j - c;
-                            for (int m = i; m <= 5; m++) {
-                                if (t.getColor(m, column) == 0) moreMoves++;
-                                else break;
-                            }
-                        }
-                    }
-                    if (moreMoves != 0) score += calcularPuntuacio(puntuacioOponent, moreMoves);
-                    puntuacioOponent = 1;
-                    blanks = 0;
-                }
-
-                if (j <= 3 && i >= 3) {
-                    for (k = 1; k < 4; ++k) {
-                        if (t.getColor(i-k, j+k) == oponent(jugador)) puntuacioOponent++;
-                        else if (t.getColor(i-k, j+k) == jugador) {
-                            puntuacioOponent = 0;
-                            blanks = 0;
-                            break;
-                        } else blanks++;
-                    }
-                    moreMoves = 0;
-                    if (blanks > 0) {
-                        for (int c = 1; c < 4; ++c) {
-                            int column = j+c, row = i-c;
-                            for (int m = row; m <= 5; ++m) {
-                                if (t.getColor(m, column) == 0) moreMoves++;
-                                else if(t.getColor(m, column) == -1);
-                                else break;
-                            }
-                        }
-                        if (moreMoves != 0) score += calcularPuntuacio(puntuacioOponent, moreMoves);
-                        puntuacioOponent = 1;
-                        blanks = 0;
-                    }
-                }
-
-                if (i >= 3 && j >= 3) {
-                    for (k = 1; k < 4; ++k) {
-                        if (t.getColor(i-k, j-k) == oponent(jugador)) puntuacioOponent++;
-                        else if (t.getColor(i-k, j-k) == jugador) {
-                            puntuacioOponent = 0;
-                            blanks = 0;
-                            break;
-                        } else blanks++;
-                    }
-
-                    moreMoves = 0;
-                    if (blanks > 0) {
-                        for (int c = 1; c < 4; ++c) {
-                            int column = j-c, row = i-c;
-                            for (int m = row; m <= 5 ; ++m) {
-                                if (t.getColor(m, column) == 0) moreMoves++;
-                                else if(t.getColor(m, column) == oponent(jugador));
-                                else  break;
-                            }
-                        }
-                        if (moreMoves != 0) score += calcularPuntuacio(puntuacioOponent, moreMoves);
-                        puntuacioOponent = 1;
-                        blanks = 0;
-                    }
-                }
-            }
-        }
-        return score;
-    }
-
-
 }
