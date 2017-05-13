@@ -47,8 +47,8 @@ public class Player implements Jugador {
     }
 
     /**
-     * @param t     Tauler actual de joc
-     * @param color Color de la peça que possarà
+     * @param t Tauler actual de joc
+     * @param color Color de la peca que possara
      * @return
      */
     @Override
@@ -74,20 +74,22 @@ public class Player implements Jugador {
     }
 
     /**
+     * Fitxa del oponent
      * @param jugador
-     * @return
+     * @return la peca del oponent
      */
     private int oponent(int jugador) {
         return -jugador;
     }
 
     /**
+     * Minimitza el valor de la funcio alfabeta
      * @param t
      * @param alfa
      * @param beta
      * @param profunditat
      * @param jugador
-     * @return
+     * @return el valor corresponent a minimitzar
      */
     private int minimitzar(Tauler t, int alfa, int beta, int profunditat, int jugador){
         if(profunditat == 0 || !t.espotmoure()) return evaluarTauler(t, jugador);
@@ -106,12 +108,13 @@ public class Player implements Jugador {
     }
 
     /**
+     * Maximitza el valor de la funcio alfabeta
      * @param t
      * @param alfa
      * @param beta
      * @param profunditat
      * @param jugador
-     * @return
+     * @return el valor corresponent a minimitzar
      */
     private int maximitzar(Tauler t, int alfa, int beta, int profunditat, int jugador){
         if(profunditat == 0 || !t.espotmoure()) return evaluarTauler(t,jugador);
@@ -130,9 +133,10 @@ public class Player implements Jugador {
     }
 
     /**
+     * Evalua cada posicio del tauler i computa una heuristica
      * @param t
      * @param jugador
-     * @return
+     * @return la heuristica
      */
     private int evaluarTauler(Tauler t, int jugador) {
 
@@ -147,6 +151,7 @@ public class Player implements Jugador {
     }
 
     /**
+     * Calcula els espais restants que queden per completar el 4 en ratlla en la fila
      * @param fila
      * @param col
      * @param t
@@ -155,23 +160,22 @@ public class Player implements Jugador {
     private int espaisRestants(int fila, int col, Tauler t){
         int espais = 0;
         for(int i = 0; i < 4 && fila >= 0; ++i){
-            if(t.getColor(fila,col)==0){
+            if(t.getColor(fila,col) == 0){
                 ++espais;
-            }
-            else{
-                break;
-            }
-            fila-=i;
+            } else break;
+
+            fila -= i;
         }
         return espais;
     }
 
     /**
+     * Puntua la casella del tauler
      * @param t
      * @param fil
      * @param col
      * @param jug
-     * @return
+     * @return la puntuacio de la casella
      */
     private Resultat puntuarCasella(Tauler t, int fil, int col, int jug) {
         int maximMenor = -1;
@@ -238,9 +242,10 @@ public class Player implements Jugador {
     }
 
     /**
+     * Calcula el comput de la casella tenint en compte les fitxes que te i les que queden per completar el 4 en ratlla
      * @param puntuacio
      * @param moviments
-     * @return
+     * @return la puntuacio de la casella
      */
     int calcularPuntuacio(int puntuacio, int moviments){
         int puntuacioMoviments = 4 - moviments;
