@@ -38,15 +38,15 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="64">
-              <caret line="76" column="7" lean-forward="true" selection-start-line="76" selection-start-column="7" selection-end-line="76" selection-end-column="7" />
+            <state relative-caret-position="392">
+              <caret line="40" column="52" lean-forward="false" selection-start-line="40" selection-start-column="52" selection-end-line="40" selection-end-column="52" />
               <folding>
                 <element signature="class#Resultat#0;class#Player#0" expanded="false" />
                 <element signature="docComment;field#InfinitPositiu#0;class#Player#0" expanded="false" />
                 <element signature="docComment;method#Player#0;class#Player#0" expanded="false" />
+                <element signature="e#1140#1141#0" expanded="true" />
+                <element signature="e#1186#1187#0" expanded="true" />
                 <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
-                <element signature="e#1080#1081#0" expanded="true" />
-                <element signature="e#1111#1112#0" expanded="true" />
                 <element signature="method#moviment#0;class#Player#0" expanded="false" />
                 <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
                 <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
@@ -62,7 +62,7 @@
       <file leaf-file-name="Jugador.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Jugador.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
+            <state relative-caret-position="224">
               <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
               <folding />
             </state>
@@ -137,6 +137,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -180,7 +181,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -457,7 +457,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25985092" sideWeight="0.46746987" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2625133" sideWeight="0.46746987" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992327" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15896739" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -482,7 +482,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Player.java</url>
-          <line>55</line>
+          <line>62</line>
           <properties />
           <option name="timeStamp" value="14" />
         </line-breakpoint>
@@ -516,9 +516,9 @@
             <element signature="class#Resultat#0;class#Player#0" expanded="false" />
             <element signature="docComment;field#InfinitPositiu#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#Player#0;class#Player#0" expanded="false" />
+            <element signature="e#1140#1141#0" expanded="true" />
+            <element signature="e#1186#1187#0" expanded="true" />
             <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
-            <element signature="e#1080#1081#0" expanded="true" />
-            <element signature="e#1111#1112#0" expanded="true" />
             <element signature="method#moviment#0;class#Player#0" expanded="false" />
             <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
             <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
@@ -562,9 +562,9 @@
             <element signature="class#Resultat#0;class#Player#0" expanded="false" />
             <element signature="docComment;field#InfinitPositiu#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#Player#0;class#Player#0" expanded="false" />
+            <element signature="e#1140#1141#0" expanded="true" />
+            <element signature="e#1186#1187#0" expanded="true" />
             <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
-            <element signature="e#1080#1081#0" expanded="true" />
-            <element signature="e#1111#1112#0" expanded="true" />
             <element signature="method#moviment#0;class#Player#0" expanded="false" />
             <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
             <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
@@ -608,9 +608,9 @@
             <element signature="class#Resultat#0;class#Player#0" expanded="false" />
             <element signature="docComment;field#InfinitPositiu#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#Player#0;class#Player#0" expanded="false" />
+            <element signature="e#1140#1141#0" expanded="true" />
+            <element signature="e#1186#1187#0" expanded="true" />
             <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
-            <element signature="e#1080#1081#0" expanded="true" />
-            <element signature="e#1111#1112#0" expanded="true" />
             <element signature="method#moviment#0;class#Player#0" expanded="false" />
             <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
             <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
@@ -655,9 +655,9 @@
             <element signature="class#Resultat#0;class#Player#0" expanded="false" />
             <element signature="docComment;field#InfinitPositiu#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#Player#0;class#Player#0" expanded="false" />
+            <element signature="e#1140#1141#0" expanded="true" />
+            <element signature="e#1186#1187#0" expanded="true" />
             <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
-            <element signature="e#1080#1081#0" expanded="true" />
-            <element signature="e#1111#1112#0" expanded="true" />
             <element signature="method#moviment#0;class#Player#0" expanded="false" />
             <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
             <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
@@ -702,9 +702,9 @@
             <element signature="class#Resultat#0;class#Player#0" expanded="false" />
             <element signature="docComment;field#InfinitPositiu#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#Player#0;class#Player#0" expanded="false" />
+            <element signature="e#1140#1141#0" expanded="true" />
+            <element signature="e#1186#1187#0" expanded="true" />
             <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
-            <element signature="e#1080#1081#0" expanded="true" />
-            <element signature="e#1111#1112#0" expanded="true" />
             <element signature="method#moviment#0;class#Player#0" expanded="false" />
             <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
             <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
@@ -735,9 +735,9 @@
             <element signature="class#Resultat#0;class#Player#0" expanded="false" />
             <element signature="docComment;field#InfinitPositiu#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#Player#0;class#Player#0" expanded="false" />
+            <element signature="e#1140#1141#0" expanded="true" />
+            <element signature="e#1186#1187#0" expanded="true" />
             <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
-            <element signature="e#1080#1081#0" expanded="true" />
-            <element signature="e#1111#1112#0" expanded="true" />
             <element signature="method#moviment#0;class#Player#0" expanded="false" />
             <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
             <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
@@ -769,9 +769,9 @@
             <element signature="class#Resultat#0;class#Player#0" expanded="false" />
             <element signature="docComment;field#InfinitPositiu#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#Player#0;class#Player#0" expanded="false" />
+            <element signature="e#1140#1141#0" expanded="true" />
+            <element signature="e#1186#1187#0" expanded="true" />
             <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
-            <element signature="e#1080#1081#0" expanded="true" />
-            <element signature="e#1111#1112#0" expanded="true" />
             <element signature="method#moviment#0;class#Player#0" expanded="false" />
             <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
             <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
@@ -808,9 +808,9 @@
             <element signature="class#Resultat#0;class#Player#0" expanded="false" />
             <element signature="docComment;field#InfinitPositiu#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#Player#0;class#Player#0" expanded="false" />
+            <element signature="e#1140#1141#0" expanded="true" />
+            <element signature="e#1186#1187#0" expanded="true" />
             <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
-            <element signature="e#1080#1081#0" expanded="true" />
-            <element signature="e#1111#1112#0" expanded="true" />
             <element signature="method#moviment#0;class#Player#0" expanded="false" />
             <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
             <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
@@ -856,9 +856,9 @@
             <element signature="class#Resultat#0;class#Player#0" expanded="false" />
             <element signature="docComment;field#InfinitPositiu#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#Player#0;class#Player#0" expanded="false" />
+            <element signature="e#1140#1141#0" expanded="true" />
+            <element signature="e#1186#1187#0" expanded="true" />
             <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
-            <element signature="e#1080#1081#0" expanded="true" />
-            <element signature="e#1111#1112#0" expanded="true" />
             <element signature="method#moviment#0;class#Player#0" expanded="false" />
             <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
             <element signature="method#maximitzar#0;class#Player#0" expanded="false" />
@@ -931,7 +931,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Jugador.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
+        <state relative-caret-position="224">
           <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
           <folding />
         </state>
@@ -939,15 +939,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="76" column="7" lean-forward="true" selection-start-line="76" selection-start-column="7" selection-end-line="76" selection-end-column="7" />
+        <state relative-caret-position="392">
+          <caret line="40" column="52" lean-forward="false" selection-start-line="40" selection-start-column="52" selection-end-line="40" selection-end-column="52" />
           <folding>
             <element signature="class#Resultat#0;class#Player#0" expanded="false" />
             <element signature="docComment;field#InfinitPositiu#0;class#Player#0" expanded="false" />
             <element signature="docComment;method#Player#0;class#Player#0" expanded="false" />
+            <element signature="e#1140#1141#0" expanded="true" />
+            <element signature="e#1186#1187#0" expanded="true" />
             <element signature="docComment;method#nom#0;class#Player#0" expanded="false" />
-            <element signature="e#1080#1081#0" expanded="true" />
-            <element signature="e#1111#1112#0" expanded="true" />
             <element signature="method#moviment#0;class#Player#0" expanded="false" />
             <element signature="method#minimitzar#0;class#Player#0" expanded="false" />
             <element signature="method#maximitzar#0;class#Player#0" expanded="false" />

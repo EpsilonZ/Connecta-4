@@ -37,6 +37,13 @@ public class Player implements Jugador {
      **/
     public Player() {}
 
+    /**
+     * Contrueix un Player amb la profunditat donada
+     * @param profunditat
+     */
+    public Player(int profunditat) {
+        this.profunditat = profunditat;
+    }
 
     /**
      * @return
