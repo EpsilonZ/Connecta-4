@@ -23,10 +23,10 @@ La nostra idea també es implementar un algoritme **alpha-beta**, més eficient 
 			- [x] Definir estructura funció
 			- [x] Reemplaçar paràmetres alpha beta
 		- [x] Funció heurística
-			- [ ] Millorar funció heurística
+			- [x] Millorar funció heurística
 		- [x] Alfa-Beta
-			- [ ] Dividir alfa beta en funció min/max
-			- [ ] Testejar
+			- [x] Dividir alfa beta en funció min/max
+			- [x] Testejar
 
 ## Autors
 - [Andrés Prieto]()
